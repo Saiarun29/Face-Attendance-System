@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f5f7fa;
+            margin: 0;
+        }
+
+        .top-bar {
+            background: #007bff;
+            padding: 10px;
+            text-align: right;
+        }
+
+        .top-bar button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 85%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .cards {
+            text-align: center;
+        }
+
+        .card {
+            display: inline-block;
+            padding: 20px;
+            margin: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 200px;
+        }
+
+        .section {
+            margin-top: 40px;
+        }
+
+        .present h2 { color: green; }
+        .absent h2 { color: orange; }
+        .notreg h2 { color: red; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+        }
+
+        .back-btn {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .back-btn button {
+            padding: 10px 20px;
+            background: #555;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .empty {
+            color: gray;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 🔝 Top Bar -->
+<div class="top-bar">
+    <a href="/logout"><button>Logout</button></a>
+</div>
+
+<div class="container">
+
+    <h1>📊 Attendance Dashboard</h1>
+
+    <!-- Cards -->
+    <div class="cards">
+        <div class="card">
+            <h3>Total Users</h3>
+            <p>{{ total_users }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Attendance</h3>
+            <p>{{ total_attendance }}</p>
+        </div>
+    </div>
+
+    <!-- ✅ Present -->
+    <div class="section present">
+        <h2>✅ Present Students</h2>
+        {% if present %}
+        <table>
+            <tr><th>Name</th><th>Roll No</th></tr>
+            {% for s in present %}
+            <tr><td>{{ s[0] }}</td><td>{{ s[1] }}</td></tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p class="empty">No students present today</p>
+        {% endif %}
+    </div>
+
+    <!-- 🟡 Absent -->
+    <div class="section absent">
+        <h2>🟡 Registered but Absent</h2>
+        {% if absent %}
+        <table>
+            <tr><th>Name</th><th>Roll No</th></tr>
+            {% for s in absent %}
+            <tr><td>{{ s[0] }}</td><td>{{ s[1] }}</td></tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p class="empty">No absent students</p>
+        {% endif %}
+    </div>
+
+    <!-- 🔴 Not Registered -->
+    <div class="section notreg">
+        <h2>🔴 Not Registered</h2>
+        {% if not_registered %}
+        <table>
+            <tr><th>Name</th><th>Roll No</th></tr>
+            {% for s in not_registered %}
+            <tr><td>{{ s[0] }}</td><td>{{ s[1] }}</td></tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p class="empty">All students are registered</p>
+        {% endif %}
+    </div>
+
+    <!-- Back -->
+    <div class="back-btn">
+        <a href="/home"><button>⬅ Back</button></a>
+    </div>
+
+</div>
+
+</body>
+</html>
