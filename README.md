@@ -1,4 +1,3 @@
-@"
 # 🎯 ProAttend – Smart Face Recognition Attendance System
 
 ProAttend is an AI-powered attendance system that uses **face recognition technology** to automatically mark attendance in real time. It reduces manual effort and improves accuracy using computer vision.
